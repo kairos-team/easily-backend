@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMINISTRADOR
+  CAIXA
+  MECANICO
+}
+
+enum Status {
+  A_PAGAR
+  ATRASADAS
+  CANCELADAS
+  CONCLUIDAS
+  INICIADAS
+  NOVAS
+  TODAS
+}
+
+enum Identification {
+  CPF
+  CNPJ
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+  uptaded   DateTime @default(now())
+}
+
+model Company {
+  id        String @id @default(uuid())
+  name      String
+  cnpj      String @unique
+  cellphone String @unique
+  email     String @unique
+  address   String
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?  @unique
+  cellphone String   @unique
+  address   String
+  cpf       String
+  dateBorn  DateTime
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+  createdAt DateTime @default(now())
+  uptaded   DateTime @default(now())
+}
+
+model Vehicle {
+  id          String   @id @default(uuid())
+  type        String
+  brand       String
+  model       String
+  plate       String   @unique
+  description String
+  createdAt   DateTime @default(now())
+  uptaded     DateTime @default(now())
+  clients     Client[]
+}
+
+model Supplier {
+  id             String         @id @default(uuid())
+  name           String
+  identification Identification
+  cellphone      String         @unique
+  stocks         Stock[]
+  products       Product[]
+}
+
+model ServiceOrder {
+  id          String   @id @default(uuid())
+  clientId    String
+  userId      String
+  status      Status
+  service     String[]
+  observation String
+  images      String[]
+  createdAt   DateTime @default(now())
+  uptadedAt   DateTime @default(now())
+}
+
+model Product {
+  id             String   @id @default(uuid())
+  name           String
+  barcode        String   @unique
+  costPrice      String
+  salePrice      String
+  category       String[]
+  supplierId     String
+  image          String
+  amount         String
+  minAmount      String
+  productAddress String
+  supplier       Supplier @relation(fields: [supplierId], references: [id])
+  createdAt      DateTime @default(now())
+  uptadedAt      DateTime @default(now())
+}
+
+model Stock {
+  id         String    @id @default(uuid())
+  productId  String
+  createdAt  DateTime  @default(now())
+  uptaded    DateTime  @default(now())
+  supplierId String?
+  supplier   Supplier? @relation(fields: [supplierId], references: [id])
+}
