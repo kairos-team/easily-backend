@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import ClientService from "./client.service";
-import ApiResponseHandler from "@/shared/utils/ApiResponseHandler";
+import ApiResponse from "@/shared/utils/api-response";
 
 export default class ClientController {
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService) { }
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const client = await this.clientService.create(req.body);
-      return ApiResponseHandler.success(res, client, 201);
+      return ApiResponse.success(res, client, 201);
     } catch (err) {
       next(err);
     }
@@ -18,7 +18,7 @@ export default class ClientController {
     try {
       const { id } = req.params;
       const client = await this.clientService.findById(id);
-      return ApiResponseHandler.success(res, client, 200);
+      return ApiResponse.success(res, client, 200);
     } catch (err) {
       next(err);
     }
@@ -28,7 +28,7 @@ export default class ClientController {
     try {
       const { id } = req.params;
       const client = await this.clientService.updateById(req.body, id);
-      return ApiResponseHandler.success(res, client, 200);
+      return ApiResponse.success(res, client, 200);
     } catch (err) {
       next(err);
     }
@@ -38,7 +38,7 @@ export default class ClientController {
     try {
       const { id } = req.params;
       const client = await this.clientService.deleteById(id);
-      return ApiResponseHandler.success(res, client, 200);
+      return ApiResponse.success(res, client, 200);
     } catch (err) {
       next(err);
     }
@@ -47,7 +47,7 @@ export default class ClientController {
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
       const clients = await this.clientService.findAll();
-      return ApiResponseHandler.success(res, clients, 200);
+      return ApiResponse.success(res, clients, 200);
     } catch (err) {
       next(err);
     }

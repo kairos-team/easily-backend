@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import ClientRepository from "./client.repository";
-import AppError from "@/shared/utils/AppError";
+import AppError from "@/shared/utils/app-error";
 
 export default class ClientService {
   constructor(private clientRepository: ClientRepository) { }

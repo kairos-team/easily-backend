@@ -38,7 +38,7 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      Role
+  role      Role     @default(CAIXA)
   createdAt DateTime @default(now())
   uptaded   DateTime @default(now())
 }
@@ -103,7 +103,7 @@ model Product {
   id             String   @id @default(uuid())
   name           String
   barcode        String   @unique
-  ncmCode        String   
+  ncmCode        String
   costPrice      String
   salePrice      String
   category       String[]

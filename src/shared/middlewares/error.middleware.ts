@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../utils/AppError";
-import ApiResponseHandler from "../utils/ApiResponseHandler";
+import AppError from "../utils/app-error";
+import ApiResponse from "../utils/api-response";
 
 export function errorMiddleware(
   err: any,
@@ -12,7 +12,7 @@ export function errorMiddleware(
     err = AppError.fromPrismaError(err);
   }
 
-  return ApiResponseHandler.error(
+  return ApiResponse.error(
     res,
     err,
     err.message,
