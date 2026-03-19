@@ -1,8 +1,8 @@
-import ServiceOrderRepository from "./serviceOrder.repository";
-import ServiceOrderController from "./serviceOrder.controller";
-import ServiceOrderService from "./serviceOrder.service";
-import { prisma } from "@/shared/db/client";
+import ServiceOrderRepository from "./service-order.repository";
+import ServiceOrderController from "./service-order.controller";
+import ServiceOrderService from "./service-order.service";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const serviceOrderRepository = new ServiceOrderRepository(prisma);
 const serviceOrderService = new ServiceOrderService(serviceOrderRepository);

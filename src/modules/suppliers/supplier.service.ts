@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import SupplierRepository from "./supplier.repository";
-import AppError from "@/shared/utils/AppError";
+import AppError from "@/shared/utils/app-error";
 
 export default class SupplierService {
   constructor(private supplierRepository: SupplierRepository) {}
@@ -22,7 +22,7 @@ export default class SupplierService {
     if (!supplier) {
       throw new AppError("Suprimento não encontrado", 404);
     }
-    return await this.supplierRepository.updateById(data, id);
+    return await this.supplierRepository.updateById(id, data);
   }
 
   async deleteById(id: string) {

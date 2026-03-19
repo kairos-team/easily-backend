@@ -1,8 +1,8 @@
 import CompanyRepository from "./company.repository";
 import CompanyController from "./company.controller";
 import CompanyService from "./company.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const companyRepository = new CompanyRepository(prisma);
 const companyService = new CompanyService(companyRepository);

@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import StockService from "./stock.service";
-import ApiResponseHandler from "@/shared/utils/ApiResponseHandler";
+import CompanyService from "./company.service";
+import ApiResponse from "@/shared/utils/api-response";
 
-export default class StockController {
-  constructor(private stockService: StockService) {}
+export default class CompanyController {
+  constructor(private companyService: CompanyService) { }
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const stock = await this.stockService.create(req.body);
-      return ApiResponseHandler.success(res, stock, 201);
+      const company = await this.companyService.create(req.body);
+      return ApiResponse.success(res, company, 201);
     } catch (err) {
       next(err);
     }
@@ -21,8 +21,8 @@ export default class StockController {
   ) {
     try {
       const { id } = req.params;
-      const stock = await this.stockService.findById(id);
-      return ApiResponseHandler.success(res, stock, 200);
+      const company = await this.companyService.findById(id);
+      return ApiResponse.success(res, company, 200);
     } catch (err) {
       next(err);
     }
@@ -35,8 +35,8 @@ export default class StockController {
   ) {
     try {
       const { id } = req.params;
-      const stock = await this.stockService.updateById(req.body, id);
-      return ApiResponseHandler.success(res, stock, 200);
+      const company = await this.companyService.updateById(req.body, id);
+      return ApiResponse.success(res, company, 200);
     } catch (err) {
       next(err);
     }
@@ -49,8 +49,8 @@ export default class StockController {
   ) {
     try {
       const { id } = req.params;
-      const stock = await this.stockService.deleteById(id);
-      return ApiResponseHandler.success(res, stock, 200);
+      const company = await this.companyService.deleteById(id);
+      return ApiResponse.success(res, company, 200);
     } catch (err) {
       next(err);
     }
@@ -58,8 +58,8 @@ export default class StockController {
 
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const clients = await this.stockService.findAll();
-      return ApiResponseHandler.success(res, clients, 200);
+      const company = await this.companyService.findAll();
+      return ApiResponse.success(res, company, 200);
     } catch (err) {
       next(err);
     }

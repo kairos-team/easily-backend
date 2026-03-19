@@ -1,8 +1,8 @@
 import SupplierRepository from "./supplier.repository";
 import SupplierController from "./supplier.controller";
 import SupplierService from "./supplier.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const supplierRepository = new SupplierRepository(prisma);
 const supplierService = new SupplierService(supplierRepository);

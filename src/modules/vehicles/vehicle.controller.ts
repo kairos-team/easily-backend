@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import SupplierService from "./supplier.service";
-import ApiResponseHandler from "@/shared/utils/ApiResponseHandler";
+import VehicleService from "./vehicle.service";
+import ApiResponse from "@/shared/utils/api-response";
 
-export default class SupplierController {
-  constructor(private supplierService: SupplierService) {}
+export default class VehicleController {
+  constructor(private vehicleService: VehicleService) { }
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const supplier = await this.supplierService.create(req.body);
-      return ApiResponseHandler.success(res, supplier, 201);
+      const vehicle = await this.vehicleService.create(req.body);
+      return ApiResponse.success(res, vehicle, 201);
     } catch (err) {
       next(err);
     }
@@ -21,8 +21,8 @@ export default class SupplierController {
   ) {
     try {
       const { id } = req.body;
-      const supplier = await this.supplierService.findById(id);
-      return ApiResponseHandler.success(res, supplier, 200);
+      const vehicle = await this.vehicleService.findById(id);
+      return ApiResponse.success(res, vehicle, 200);
     } catch (err) {
       next(err);
     }
@@ -35,8 +35,8 @@ export default class SupplierController {
   ) {
     try {
       const { id } = req.body;
-      const supplier = await this.supplierService.updateById(req.body, id);
-      return ApiResponseHandler.success(res, supplier, 200);
+      const vehicle = await this.vehicleService.updateById(req.body, id);
+      return ApiResponse.success(res, vehicle, 200);
     } catch (err) {
       next(err);
     }
@@ -49,8 +49,8 @@ export default class SupplierController {
   ) {
     try {
       const { id } = req.body;
-      const supplier = await this.supplierService.deleteById(id);
-      return ApiResponseHandler.success(res, supplier, 200);
+      const vehicle = await this.vehicleService.deleteById(id);
+      return ApiResponse.success(res, vehicle, 200);
     } catch (err) {
       next(err);
     }
@@ -58,8 +58,8 @@ export default class SupplierController {
 
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const supplier = await this.supplierService.findAll();
-      return ApiResponseHandler.success(res, supplier, 200);
+      const vehicle = await this.vehicleService.findAll();
+      return ApiResponse.success(res, vehicle, 200);
     } catch (err) {
       next(err);
     }
