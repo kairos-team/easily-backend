@@ -1,7 +1,7 @@
 import ClientRepository from "./client.repository";
 import ClientController from "./client.controller";
 import ClientService from "./client.service";
-import { prisma } from "@/shared/db/client";
+import { prisma } from "@/shared/db/prisma";
 import { Router } from "express";
 
 const clientRepository = new ClientRepository(prisma);

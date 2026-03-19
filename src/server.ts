@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import routes from "./routes";
 import dbConnection from "./db/client";
-import { errorMiddleware } from "./shared/middlewares/errorMiddleware";
+import { errorMiddleware } from "./shared/middlewares/error.middleware";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

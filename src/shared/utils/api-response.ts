@@ -1,6 +1,6 @@
 import { Response } from "express";
 
-export default class ApiResponseHandler {
+export default class ApiResponse {
   static success(res: Response, data: any, status = 200) {
     return res.status(status).json({
       status: "success",
