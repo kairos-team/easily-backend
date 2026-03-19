@@ -1,8 +1,8 @@
 import ProductRepository from "./product.repository";
 import ProductController from "./product.controller";
 import ProductService from "./product.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const productRepository = new ProductRepository(prisma);
 const productService = new ProductService(productRepository);

@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import ServiceOrderService from "./serviceOrder.service";
-import ApiResponseHandler from "@/shared/utils/ApiResponseHandler";
+import ServiceOrderService from "./service-order.service";
+import ApiResponse from "@/shared/utils/api-response";
 
 export default class ServiceOrderController {
-  constructor(private serviceOrderService: ServiceOrderService) {}
+  constructor(private serviceOrderService: ServiceOrderService) { }
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const serviceOrder = await this.serviceOrderService.create(req.body);
-      return ApiResponseHandler.success(res, serviceOrder, 201);
+      return ApiResponse.success(res, serviceOrder, 201);
     } catch (err) {
       next(err);
     }
@@ -22,7 +22,7 @@ export default class ServiceOrderController {
     try {
       const { id } = req.body;
       const serviceOrder = await this.serviceOrderService.findById(id);
-      return ApiResponseHandler.success(res, serviceOrder, 200);
+      return ApiResponse.success(res, serviceOrder, 200);
     } catch (err) {
       next(err);
     }
@@ -39,7 +39,7 @@ export default class ServiceOrderController {
         req.body,
         id,
       );
-      return ApiResponseHandler.success(res, serviceOrder, 200);
+      return ApiResponse.success(res, serviceOrder, 200);
     } catch (err) {
       next(err);
     }
@@ -53,7 +53,7 @@ export default class ServiceOrderController {
     try {
       const { id } = req.body;
       const serviceOrder = await this.serviceOrderService.deleteById(id);
-      return ApiResponseHandler.success(res, serviceOrder, 200);
+      return ApiResponse.success(res, serviceOrder, 200);
     } catch (err) {
       next(err);
     }
@@ -62,7 +62,7 @@ export default class ServiceOrderController {
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
       const serviceOrder = await this.serviceOrderService.findAll();
-      return ApiResponseHandler.success(res, serviceOrder, 200);
+      return ApiResponse.success(res, serviceOrder, 200);
     } catch (err) {
       next(err);
     }

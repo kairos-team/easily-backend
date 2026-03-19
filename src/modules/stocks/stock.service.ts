@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import StockRepository from "./stock.repository";
-import AppError from "@/shared/utils/AppError";
+import AppError from "@/shared/utils/app-error";
 
 export default class StockService {
   constructor(private stockRepository: StockRepository) {}

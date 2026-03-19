@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
-import ServiceOrderRepository from "./serviceOrder.repository";
-import AppError from "@/shared/utils/AppError";
+import ServiceOrderRepository from "./service-order.repository";
+import AppError from "@/shared/utils/app-error";
 
 export default class ServiceOrderService {
-  constructor(private serviceOrderRepository: ServiceOrderRepository) {}
+  constructor(private serviceOrderRepository: ServiceOrderRepository) { }
 
   async create(data: Prisma.ServiceOrderCreateInput) {
     return await this.serviceOrderRepository.create(data);

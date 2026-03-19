@@ -1,8 +1,8 @@
 import StockRepository from "./stock.repository";
 import StockController from "./stock.controller";
 import StockService from "./stock.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const stockRepository = new StockRepository(prisma);
 const stockService = new StockService(stockRepository);

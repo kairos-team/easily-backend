@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import VehicleRepository from "./vehicle.repository";
-import AppError from "@/shared/utils/AppError";
+import AppError from "@/shared/utils/app-error";
 
 export default class VehicleService {
   constructor(private vehicleRepository: VehicleRepository) {}

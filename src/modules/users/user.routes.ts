@@ -1,8 +1,8 @@
 import UserRepository from "./user.repository";
 import UserController from "./user.controller";
-import UserService from "./user.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
+import UserService from "./user.service";
 
 const userRepository = new UserRepository(prisma);
 const userService = new UserService(userRepository);

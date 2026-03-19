@@ -1,8 +1,8 @@
 import VehicleRepository from "./vehicle.repository";
 import VehicleController from "./vehicle.controller";
 import VehicleService from "./vehicle.service";
-import { prisma } from "@/shared/db/client";
 import { Router } from "express";
+import { prisma } from "@/shared/db/prisma";
 
 const vehicleRepository = new VehicleRepository(prisma);
 const vehicleService = new VehicleService(vehicleRepository);
