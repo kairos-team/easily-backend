@@ -1,13 +1,13 @@
 import AppError from "@/shared/utils/app-error";
 import { comparePassword, hashPassword } from "@/shared/utils/hash";
 import { generateRefreshToken, generateSecretToken } from "@/shared/utils/jwt";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import AuthRepository from "./auth.repository";
 
 export default class AuthService {
+  constructor(private authRepository: AuthRepository) {}
+
   async register(name: string, email: string, password: string) {
-    const exists = await prisma.user.findUnique({ where: { email } });
+    const exists = await this.authRepository.findByEmail(email);
 
     if (exists) {
       throw new AppError("Usuário já existente", 303);
@@ -15,13 +15,11 @@ export default class AuthService {
 
     const hashed = await hashPassword(password);
 
-    return prisma.user.create({
-      data: { name, email, password: hashed }
-    });
+    return this.authRepository.create({ name, email, password: hashed });
   }
 
   async login(email: string, password: string) {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await this.authRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError("Usuário não encontrado", 404);
